@@ -22,6 +22,7 @@ set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
 FetchContent_MakeAvailable(glfw)
+find_package(OpenGL REQUIRED)
 
 add_executable(HatRenderer
 	HatRenderer.cpp
@@ -31,6 +32,7 @@ add_executable(HatRenderer
 target_link_libraries(HatRenderer
 	PRIVATE
 	glfw
+	OpenGL::GL
 )
 
 
