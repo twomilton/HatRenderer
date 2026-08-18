@@ -75,9 +75,10 @@ int main()
 
 	float vertices[] =
 	{
-		-0.5f, -0.5f,
-		 0.5f, -0.5f,
-		 0.0f, 0.5f
+		// Position		// Color
+		-0.5f, -0.5f,	1.0f, 0.0f, 0.0f,	//Red
+		 0.5f, -0.5f,	0.0f, 1.0f, 0.0f,	//Green
+		 0.0f, 0.5f,	0.0f, 0.0f, 1.0f	//Blue
 	};
 
 	unsigned int VBO;
@@ -104,11 +105,23 @@ int main()
 		2,
 		GL_FLOAT,
 		GL_FALSE,
-		2 * sizeof(float),
+		5 * sizeof(float),
 		(void*)0
 	);
 
 	glEnableVertexAttribArray(0);
+
+	glVertexAttribPointer(
+		1,
+		3,
+		GL_FLOAT,
+		GL_FALSE,
+		5 * sizeof(float),
+		(void*)(2 * sizeof(float))
+	);
+
+	glEnableVertexAttribArray(1);
+
 
 	const GLubyte* vendor = glGetString(GL_VENDOR);
 	const GLubyte* renderer = glGetString(GL_RENDERER);
