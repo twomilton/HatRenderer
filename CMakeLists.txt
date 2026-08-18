@@ -46,6 +46,11 @@ add_executable(HatRenderer
 	Graphics/Shader.h
 	Graphics/Shader.cpp)
 
+target_compile_definitions(HatRenderer
+	PRIVATE
+	HATRENDERER_SHADER_DIR="${CMAKE_SOURCE_DIR}/shaders"
+)
+
 target_link_libraries(HatRenderer
 	PRIVATE
 	glfw

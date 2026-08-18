@@ -7,6 +7,10 @@
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
 
+#include "Graphics/Shader.h"
+
+
+
 void glfwErrorCallback(int error, const char* description)
 {
 	std::cerr << "GLFW Error " << error << ": "
@@ -122,11 +126,21 @@ int main()
 
 	std::cout << "OpenGL Context created successfully!\n";
 
+	Shader triangleShader(
+		HATRENDERER_SHADER_DIR "/triangle.vert",
+		HATRENDERER_SHADER_DIR "/triangle.frag"
+	);
+
 	// Main app loop.
 	while (!glfwWindowShouldClose(window))
 	{
 		glClearColor(0.1f, 0.2f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
+
+		triangleShader.bind();
+		glBindVertexArray(VAO);
+
+		glDrawArrays(GL_TRIANGLES, 0, 3);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
@@ -135,6 +149,9 @@ int main()
 	// Clean up.
 	glfwDestroyWindow(window);
 	glfwTerminate();
+
+	glDeleteVertexArrays(1, &VAO);
+	glDeleteBuffers(1, &VBO);
 
 	std::cout << "HatRenderer shutting down.\n";
 	
