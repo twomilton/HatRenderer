@@ -47,8 +47,33 @@ void Renderer::clear() const
 
 void Renderer::draw() const
 {
+	const float aspectRatio = 1280.0f / 720.0f;
+
+	/*Mat4 projection =
+		Mat4::orthographic(
+			-aspectRatio,
+			aspectRatio,
+			-1.0f,
+			1.0f,
+			-1.0f,
+			1.0f
+		);*/
+
+	Mat4 rotation =
+		Mat4::rotationZ(0.5f);
+
+	Mat4 projection =
+		Mat4::orthographic(
+			-1.777f,
+			1.777f,
+			-1.0f,
+			1.0f,
+			-1.0f,
+			1.0f
+		);
+
 	Mat4 transform =
-		Mat4::rotationZ(1.5707963f);
+		projection * rotation;
 
 	m_shader.bind();
 

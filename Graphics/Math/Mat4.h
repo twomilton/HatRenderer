@@ -15,4 +15,15 @@ struct Mat4
 	static Mat4 rotationZ(
 		float radians
 	);
+
+	static Mat4 orthographic(
+		float left,
+		float right,
+		float bottom,
+		float top,
+		float nearPlane,
+		float farPlnae
+	);
+
+	Mat4 operator*(const Mat4& other) const;
 };
