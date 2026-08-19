@@ -43,9 +43,6 @@ add_executable(HatRenderer
 	HatRenderer.cpp
 	HatRenderer.h
 
-	Graphics/Math/Mat4.h
-	Graphics/Math/Vec3.h
-
 	Graphics/VertexBuffer.cpp
 	Graphics/VertexBuffer.h
 
@@ -57,8 +54,12 @@ add_executable(HatRenderer
 
 	Graphics/Shader.cpp 
 	Graphics/Shader.h
+
+	Graphics/Math/Mat4.cpp
+	Graphics/Math/Mat4.h
+	Graphics/Math/Vec3.h
 	
-  "Graphics/VertexArray.cpp" "Graphics/VertexArray.h" "Graphics/Math/Vec3.h" "Graphics/Math/Mat4.h")
+  "Graphics/VertexArray.cpp" "Graphics/VertexArray.h" "Graphics/Math/Vec3.h" "Graphics/Math/Mat4.h" "Graphics/Math/Mat4.cpp")
 
 target_compile_definitions(HatRenderer
 	PRIVATE

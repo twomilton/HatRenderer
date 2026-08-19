@@ -1,4 +1,5 @@
 #include "Renderer.h"
+#include "Math/Mat4.h"
 
 #include <glad/gl.h>
 
@@ -46,7 +47,16 @@ void Renderer::clear() const
 
 void Renderer::draw() const
 {
+	Mat4 transform =
+		Mat4::translation(0.5f, 0.0f, 0.0f);
+
 	m_shader.bind();
+
+	m_shader.setMat4(
+		"uTransform",
+		transform
+	);
+
 	m_vertexArray.bind();
 
 	glDrawArrays(GL_TRIANGLES, 0, 3);

@@ -135,6 +135,29 @@ Shader::~Shader()
 
 void Shader::bind() const
 {
-	glUseProgram(m_program);
+	glUseProgram(m_program);	
 }
 
+void Shader::setMat4(
+	const char* name,
+	const Mat4& matrix
+) const
+{
+	const int location =
+		glGetUniformLocation(m_program, name);
+
+	if (location == -1)
+	{
+		std::cerr << "WARNING: Uniform not found: "
+			<< name << '\n';
+
+		return;
+	}
+
+	glUniformMatrix4fv(
+		location,
+		1,
+		GL_FALSE,
+		&matrix.m[0][0]
+	);
+}
