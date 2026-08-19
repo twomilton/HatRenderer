@@ -79,14 +79,14 @@ int main()
 
 
 	const GLubyte* vendor = glGetString(GL_VENDOR);
-	const GLubyte* renderer = glGetString(GL_RENDERER);
+	const GLubyte* rendererName = glGetString(GL_RENDERER);
 	const GLubyte* version = glGetString(GL_VERSION);
 
 	std::cout << "OpenGL Vender:	"
 		<< vendor << '\n';
 
 	std::cout << "OpenGL Renderer:	"
-		<< renderer << '\n';
+		<< rendererName << '\n';
 
 	std::cout << "OpenGL Version:	"
 		<< version << '\n';

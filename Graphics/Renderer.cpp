@@ -4,7 +4,7 @@
 
 namespace
 {
-	constextpr float vertices[] =
+	const float vertices[] =
 	{
 		// Position		// Color
 		-0.5f, -0.5f,	1.0f, 0.0f, 0.0f,	//Red
@@ -20,17 +20,17 @@ Renderer::Renderer()
 		HATRENDERER_SHADER_DIR "/triangle.vert",
 		HATRENDERER_SHADER_DIR "/triangle.frag")
 {
-	m_vertexArray->bind();
-	m_vertexBuffer->bind();
+	m_vertexArray.bind();
+	m_vertexBuffer.bind();
 
-	m_vertexArray->addFloatAttribute(
+	m_vertexArray.addFloatAttribute(
 		0,
 		2,
 		5 * sizeof(float),
 		0
 	);
 
-	m_vertexArray->addFloatAttribute(
+	m_vertexArray.addFloatAttribute(
 		1,
 		3,
 		5 * sizeof(float),
