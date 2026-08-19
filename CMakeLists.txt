@@ -43,8 +43,19 @@ add_executable(HatRenderer
 	HatRenderer.cpp
 	HatRenderer.h
 
+	Graphics/VertexBuffer.cpp
+	Graphics/VertexBuffer.h
+
+	Graphics/VertexArray.cpp
+	Graphics/VertexArray.h
+
+	Graphics/Renderer.cpp
+	Graphics/Renderer.h
+
+	Graphics/Shader.cpp 
 	Graphics/Shader.h
-	Graphics/Shader.cpp)
+	
+  "Graphics/VertexArray.cpp" "Graphics/VertexArray.h")
 
 target_compile_definitions(HatRenderer
 	PRIVATE

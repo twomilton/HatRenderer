@@ -7,9 +7,13 @@
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
 
+#include "Graphics/VertexBuffer.h"
+#include "Graphics/VertexArray.h"
 #include "Graphics/Shader.h"
+#include "Graphics/Renderer.h"
 
 
+// GLFW initialization
 
 void glfwErrorCallback(int error, const char* description)
 {
@@ -73,55 +77,6 @@ int main()
 
 	std::cout << "GLAD initialized.\n";
 
-	float vertices[] =
-	{
-		// Position		// Color
-		-0.5f, -0.5f,	1.0f, 0.0f, 0.0f,	//Red
-		 0.5f, -0.5f,	0.0f, 1.0f, 0.0f,	//Green
-		 0.0f, 0.5f,	0.0f, 0.0f, 1.0f	//Blue
-	};
-
-	unsigned int VBO;
-
-	glGenBuffers(1, &VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-
-	glBufferData(
-		GL_ARRAY_BUFFER,
-		sizeof(vertices),
-		vertices,
-		GL_STATIC_DRAW
-	);
-
-	unsigned int VAO;
-
-	glGenVertexArrays(1, &VAO);
-	glBindVertexArray(VAO);
-
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-
-	glVertexAttribPointer(
-		0,
-		2,
-		GL_FLOAT,
-		GL_FALSE,
-		5 * sizeof(float),
-		(void*)0
-	);
-
-	glEnableVertexAttribArray(0);
-
-	glVertexAttribPointer(
-		1,
-		3,
-		GL_FLOAT,
-		GL_FALSE,
-		5 * sizeof(float),
-		(void*)(2 * sizeof(float))
-	);
-
-	glEnableVertexAttribArray(1);
-
 
 	const GLubyte* vendor = glGetString(GL_VENDOR);
 	const GLubyte* renderer = glGetString(GL_RENDERER);
@@ -139,32 +94,23 @@ int main()
 
 	std::cout << "OpenGL Context created successfully!\n";
 
-	Shader triangleShader(
-		HATRENDERER_SHADER_DIR "/triangle.vert",
-		HATRENDERER_SHADER_DIR "/triangle.frag"
-	);
+
+	Renderer renderer;
+
 
 	// Main app loop.
 	while (!glfwWindowShouldClose(window))
 	{
-		glClearColor(0.1f, 0.2f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
-
-		triangleShader.bind();
-		glBindVertexArray(VAO);
-
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		renderer.clear();
+		renderer.draw();
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
 
-	// Clean up.
+	// Window clean up.
 	glfwDestroyWindow(window);
 	glfwTerminate();
-
-	glDeleteVertexArrays(1, &VAO);
-	glDeleteBuffers(1, &VBO);
 
 	std::cout << "HatRenderer shutting down.\n";
 	
