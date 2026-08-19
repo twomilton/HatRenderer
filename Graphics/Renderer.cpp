@@ -48,7 +48,7 @@ void Renderer::clear() const
 void Renderer::draw() const
 {
 	Mat4 transform =
-		Mat4::translation(0.5f, 0.0f, 0.0f);
+		Mat4::rotationZ(1.5707963f);
 
 	m_shader.bind();
 

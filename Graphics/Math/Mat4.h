@@ -11,4 +11,8 @@ struct Mat4
 		float y,
 		float z
 	);
+
+	static Mat4 rotationZ(
+		float radians
+	);
 };
