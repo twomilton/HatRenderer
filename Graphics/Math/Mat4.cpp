@@ -1,6 +1,9 @@
 #include "Mat4.h"
+#include "Vec3.h"
 
 #include <cmath>
+
+#include <iostream>
 
 Mat4 Mat4::identity()
 {
@@ -88,10 +91,80 @@ Mat4 Mat4::operator*(const Mat4& other) const
 			for (int k = 0; k < 4; ++k)
 			{
 				result.m[row][column] +=
-					m[row][k] * other.m[k][column];
+					other.m[row][k] * m[k][column];
 			}
 		}
 	}
+
+	return result;
+}
+
+Mat4 Mat4::lookAt(
+	float eyeX,
+	float eyeY,
+	float eyeZ,
+	float targetX,
+	float targetY,
+	float targetZ,
+	float upX,
+	float upY,
+	float upZ)
+{
+	Vec3 eye{
+		eyeX,
+		eyeY,
+		eyeZ
+	};
+
+	Vec3 target{
+		targetX,
+		targetY,
+		targetZ
+	};
+
+	Vec3 worldUp{
+		upX,
+		upY,
+		upZ
+	};
+
+	Vec3 forward =
+		(target - eye).normalized();
+
+	Vec3 right =
+		Vec3::cross(
+			forward,
+			worldUp
+		).normalized();
+
+	Vec3 up =
+		Vec3::cross(
+			right,
+			forward
+		);
+
+	Mat4 result = Mat4::identity();
+
+	result.m[0][0] = right.x;
+	result.m[1][0] = right.y;
+	result.m[2][0] = right.z;
+
+	result.m[0][1] = up.x;
+	result.m[1][1] = up.y;
+	result.m[2][1] = up.z;
+
+	result.m[0][2] = -forward.x;
+	result.m[1][2] = -forward.y;
+	result.m[2][2] = -forward.z;
+
+	result.m[3][0] =
+		-Vec3::dot(right, eye);
+
+	result.m[3][1] =
+		-Vec3::dot(up, eye);
+
+	result.m[3][2] =
+		Vec3::dot(forward, eye);
 
 	return result;
 }

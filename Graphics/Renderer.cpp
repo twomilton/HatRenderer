@@ -47,33 +47,41 @@ void Renderer::clear() const
 
 void Renderer::draw() const
 {
-	const float aspectRatio = 1280.0f / 720.0f;
+	const float aspectRatio =
+		static_cast<float>(m_viewportWidth) /
+		static_cast<float>(m_viewportHeight);
 
-	/*Mat4 projection =
-		Mat4::orthographic(
-			-aspectRatio,
-			aspectRatio,
-			-1.0f,
-			1.0f,
-			-1.0f,
-			1.0f
-		);*/
+	Mat4 translation =
+		Mat4::translation(
+			0.0f,
+			0.5f,
+			0.0f
+		);
 
 	Mat4 rotation =
 		Mat4::rotationZ(0.5f);
 
 	Mat4 projection =
 		Mat4::orthographic(
-			-1.777f,
-			1.777f,
+			-aspectRatio,
+			aspectRatio,
 			-1.0f,
 			1.0f,
-			-1.0f,
-			1.0f
+			-10.0f,
+			10.0f
+		);
+
+	Mat4 view =
+		Mat4::lookAt(
+			0.0f, 0.0f, 3.0f,
+			0.0f, 0.0f, 0.0f,
+			0.0f, 1.0f, 0.0f
 		);
 
 	Mat4 transform =
-		projection * rotation;
+		//projection * rotation;
+		projection * view;
+		//projection * view * rotation;
 
 	m_shader.bind();
 
@@ -86,4 +94,11 @@ void Renderer::draw() const
 
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 }
+
+void Renderer::setViewportSize(int width, int height)
+{
+	m_viewportWidth = width;
+	m_viewportHeight = height;
+}
+
 

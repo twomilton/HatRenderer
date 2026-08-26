@@ -21,6 +21,28 @@ void glfwErrorCallback(int error, const char* description)
 		<< description << '\n';
 }
 
+// callback to resize window
+void framebufferResizeCallback(
+	GLFWwindow* window,
+	int width,
+	int height)
+{
+	glViewport(0, 0, width, height);
+
+	Renderer* renderer =
+		static_cast<Renderer*>(
+			glfwGetWindowUserPointer(window)
+			);
+
+	if (renderer != nullptr)
+	{
+		renderer->setViewportSize(
+			width,
+			height
+		);
+	}
+}
+
 
 int main()
 {
@@ -60,6 +82,11 @@ int main()
 
 	std::cout << "Window created successfully!\n";
 
+	glfwSetFramebufferSizeCallback(
+		window,
+		framebufferResizeCallback
+	);
+
 	// Make the OpenGL context current.
 	glfwMakeContextCurrent(window);
 
@@ -82,7 +109,7 @@ int main()
 	const GLubyte* rendererName = glGetString(GL_RENDERER);
 	const GLubyte* version = glGetString(GL_VERSION);
 
-	std::cout << "OpenGL Vender:	"
+	std::cout << "OpenGL Vendor:	"
 		<< vendor << '\n';
 
 	std::cout << "OpenGL Renderer:	"
@@ -96,6 +123,33 @@ int main()
 
 
 	Renderer renderer;
+
+	glfwSetWindowUserPointer(
+		window,
+		&renderer
+	);
+
+	int framebufferWidth;
+	int framebufferHeight;
+
+	glfwGetFramebufferSize(
+		window,
+		&framebufferWidth,
+		&framebufferHeight
+	);
+
+	glViewport(
+		0,
+		0,
+		framebufferWidth,
+		framebufferHeight
+	);
+
+	renderer.setViewportSize(
+		framebufferWidth,
+		framebufferHeight
+	);
+
 
 
 	// Main app loop.

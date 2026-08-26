@@ -25,5 +25,17 @@ struct Mat4
 		float farPlnae
 	);
 
+	static Mat4 lookAt(
+		float eyeX,
+		float eyeY,
+		float eyeZ,
+		float targetX,
+		float targetY,
+		float targetZ,
+		float upX,
+		float upY,
+		float upZ
+	);
+
 	Mat4 operator*(const Mat4& other) const;
 };
