@@ -9,10 +9,17 @@ namespace
 {
 	const float vertices[] =
 	{
-		// Position			// Color
-		-0.5f, -0.5f, 0.0f,	 1.0f, 0.0f, 0.0f,	//Red
-		 0.5f, -0.5f, 0.0f,	 0.0f, 1.0f, 0.0f,	//Green
-		 0.0f, 0.5f, -1.0f,	 0.0f, 0.0f, 1.0f	//Blue
+		// Position	Front	// Color
+		-0.5f, -0.5f, 0.5f,	 1.0f, 0.0f, 0.0f,	//Red
+		 0.5f, -0.5f, 0.5f,	 0.0f, 1.0f, 0.0f,	//Green
+		 0.5f, 0.5f,  0.5f,	 0.0f, 0.0f, 1.0f,	//Blue
+		 -0.5f,0.5f,  0.5f,  0,0,0,
+
+		 // Back
+		-0.5f, -0.5f, -0.5f, 0,1,0,
+		 0.5f, -0.5f, -0.5f, 0,0,0,
+		 0.5f,  0.5f, -0.5f, 0,0,0,
+		-0.5f,  0.5f, -0.5f, 1,0,0,
 	};
 }
 
@@ -82,8 +89,14 @@ void Renderer::draw(
 			0.0f
 		);
 
-	Mat4 rotation =
+	Mat4 rotationY =
 		Mat4::rotationY(0.7f);
+
+	Mat4 rotationX =
+		Mat4::rotationX(0.5f);
+
+	Mat4 rotation =
+		rotationY * rotationX;
 
 	Mat4 view =
 		Mat4::lookAt(
@@ -107,14 +120,6 @@ void Renderer::draw(
 
 	m_vertexArray.bind();
 	indexBuffer.bind();
-
-	//std::cout << "Index count: "
-	//	<< indexBuffer.getCount()
-	//	<< '\n';
-
-	//std::cout << "VAO: "
-	//	<< m_vertexArray.id()
-	//	<< '\n';
 			
 
 	//glDrawElements(GL_TRIANGLES, 0, 3);

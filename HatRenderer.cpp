@@ -154,12 +154,34 @@ int main()
 
 	unsigned int indices[] =
 	{
-		0, 1, 2
+		// Front
+		0, 1, 2,
+		2, 3, 0,
+
+		// Back
+		4, 6, 5,
+		6, 4, 7,
+
+		// Left
+		4, 0, 3,
+		3, 7, 4,
+
+		// Right 
+		1, 5, 6,
+		6, 2, 1,
+
+		// Top
+		3, 2, 6,
+		6, 7, 3,
+
+		// Bottom
+		4, 5, 1,
+		1, 0, 4
 	};
 
 	IndexBuffer indexBuffer(
 		indices,
-		3
+		sizeof(indices) / sizeof(unsigned int)
 	);
 
 	// Main app loop.
