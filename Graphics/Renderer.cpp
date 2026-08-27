@@ -7,10 +7,10 @@ namespace
 {
 	const float vertices[] =
 	{
-		// Position		// Color
-		-0.5f, -0.5f,	1.0f, 0.0f, 0.0f,	//Red
-		 0.5f, -0.5f,	0.0f, 1.0f, 0.0f,	//Green
-		 0.0f, 0.5f,	0.0f, 0.0f, 1.0f	//Blue
+		// Position			// Color
+		-0.5f, -0.5f, 0.0f,	 1.0f, 0.0f, 0.0f,	//Red
+		 0.5f, -0.5f, 0.0f,	 0.0f, 1.0f, 0.0f,	//Green
+		 0.0f, 0.5f, -1.0f,	 0.0f, 0.0f, 1.0f	//Blue
 	};
 }
 
@@ -26,8 +26,8 @@ Renderer::Renderer()
 
 	m_vertexArray.addFloatAttribute(
 		0,
-		2,
-		5 * sizeof(float),
+		3,
+		6 * sizeof(float),
 		0
 	);
 
@@ -42,7 +42,10 @@ Renderer::Renderer()
 void Renderer::clear() const
 {
 	glClearColor(0.1f, 0.2f, 0.3f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(
+		GL_COLOR_BUFFER_BIT |
+		GL_DEPTH_BUFFER_BIT
+	);
 }
 
 void Renderer::draw() const
@@ -71,12 +74,12 @@ void Renderer::draw() const
 	Mat4 translation =
 		Mat4::translation(
 			0.0f,
-			0.5f,
+			0.0f,
 			0.0f
 		);
 
 	Mat4 rotation =
-		Mat4::rotationZ(0.5f);
+		Mat4::rotationY(0.7f);
 
 	Mat4 view =
 		Mat4::lookAt(
@@ -86,9 +89,10 @@ void Renderer::draw() const
 		);
 
 	Mat4 transform =
+		//projection * view;
 		//projection * rotation;
-		projection * view * translation;
-		//projection * view * rotation;
+		//projection * view * translation;
+		projection * view * rotation;
 
 	m_shader.bind();
 

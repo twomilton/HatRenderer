@@ -103,7 +103,7 @@ int main()
 	}
 
 	std::cout << "GLAD initialized.\n";
-
+	glEnable(GL_DEPTH_TEST);
 
 	const GLubyte* vendor = glGetString(GL_VENDOR);
 	const GLubyte* rendererName = glGetString(GL_RENDERER);

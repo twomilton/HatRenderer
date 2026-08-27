@@ -28,6 +28,38 @@ Mat4 Mat4::translation(float x, float y, float z)
 	return result;
 }
 
+Mat4 Mat4::rotationX(float radians)
+{
+	Mat4 result = Mat4::identity();
+
+	const float c = std::cos(radians);
+	const float s = std::sin(radians);
+
+	result.m[1][1] = c;
+	result.m[1][2] = -s;
+
+	result.m[2][1] = s;
+	result.m[2][2] = c;
+
+	return result;
+}
+
+Mat4 Mat4::rotationY(float radians)
+{
+	Mat4 result = Mat4::identity();
+
+	const float c = std::cos(radians);
+	const float s = std::sin(radians);
+
+	result.m[0][0] = c;
+	result.m[0][2] = -s;
+
+	result.m[2][0] = s;
+	result.m[2][2] = c;
+
+	return result;
+}
+
 Mat4 Mat4::rotationZ(float radians)
 {
 	Mat4 result = Mat4::identity();

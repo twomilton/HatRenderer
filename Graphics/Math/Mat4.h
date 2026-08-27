@@ -12,6 +12,10 @@ struct Mat4
 		float z
 	);
 
+	static Mat4 rotationX(float radians);
+
+	static Mat4 rotationY(float radians);
+
 	static Mat4 rotationZ(
 		float radians
 	);
