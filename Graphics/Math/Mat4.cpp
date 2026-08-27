@@ -167,4 +167,35 @@ Mat4 Mat4::lookAt(
 		Vec3::dot(forward, eye);
 
 	return result;
+};
+
+Mat4 Mat4::perspective(
+	float fovRadians,
+	float aspect,
+	float nearPlane,
+	float farPlane)
+{
+	Mat4 result{};
+
+	const float f =
+		1.0f / std::tan(fovRadians * 0.5f);
+
+	result.m[0][0] =
+		f / aspect;
+
+	result.m[1][1] =
+		f;
+
+	result.m[2][2] =
+		(farPlane + nearPlane) /
+		(nearPlane - farPlane);
+
+	result.m[2][3] =
+		-1.0f;
+
+	result.m[3][2] =
+		(2.0f * farPlane * nearPlane) /
+		(nearPlane - farPlane);
+
+	return result;
 }

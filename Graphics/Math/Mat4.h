@@ -25,6 +25,13 @@ struct Mat4
 		float farPlnae
 	);
 
+	static Mat4 perspective(
+		float fovRadians,
+		float aspect,
+		float nearPlane,
+		float farPlane
+	);
+
 	static Mat4 lookAt(
 		float eyeX,
 		float eyeY,

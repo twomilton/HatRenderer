@@ -51,6 +51,23 @@ void Renderer::draw() const
 		static_cast<float>(m_viewportWidth) /
 		static_cast<float>(m_viewportHeight);
 
+	Mat4 projection =
+		//Mat4::orthographic(
+		//	-aspectRatio,
+		//	aspectRatio,
+		//	-1.0f,
+		//	1.0f,
+		//	-10.0f,
+		//	10.0f
+		//);
+
+		Mat4::perspective(
+			45.0f * 3.14159265f / 100.0f,
+			aspectRatio,
+			0.1f,
+			100.0f
+		);
+
 	Mat4 translation =
 		Mat4::translation(
 			0.0f,
@@ -61,16 +78,6 @@ void Renderer::draw() const
 	Mat4 rotation =
 		Mat4::rotationZ(0.5f);
 
-	Mat4 projection =
-		Mat4::orthographic(
-			-aspectRatio,
-			aspectRatio,
-			-1.0f,
-			1.0f,
-			-10.0f,
-			10.0f
-		);
-
 	Mat4 view =
 		Mat4::lookAt(
 			0.0f, 0.0f, 3.0f,
@@ -80,7 +87,7 @@ void Renderer::draw() const
 
 	Mat4 transform =
 		//projection * rotation;
-		projection * view;
+		projection * view * translation;
 		//projection * view * rotation;
 
 	m_shader.bind();
