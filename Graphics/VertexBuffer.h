@@ -10,6 +10,7 @@ public:
 	void unbind() const;
 
 	unsigned int id() const;
+	//unsigned int indices[];
 
 private:
 	unsigned int m_id = 0;

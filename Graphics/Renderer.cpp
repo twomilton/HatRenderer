@@ -3,6 +3,8 @@
 
 #include <glad/gl.h>
 
+#include <iostream>
+
 namespace
 {
 	const float vertices[] =
@@ -34,8 +36,8 @@ Renderer::Renderer()
 	m_vertexArray.addFloatAttribute(
 		1,
 		3,
-		5 * sizeof(float),
-		2 * sizeof(float)
+		6 * sizeof(float),
+		3 * sizeof(float)
 	);
 }
 
@@ -48,7 +50,9 @@ void Renderer::clear() const
 	);
 }
 
-void Renderer::draw() const
+void Renderer::draw( 
+	const IndexBuffer& indexBuffer 
+) const
 {
 	const float aspectRatio =
 		static_cast<float>(m_viewportWidth) /
@@ -65,7 +69,7 @@ void Renderer::draw() const
 		//);
 
 		Mat4::perspective(
-			45.0f * 3.14159265f / 100.0f,
+			45.0f * 3.14159265f / 180.0f,
 			aspectRatio,
 			0.1f,
 			100.0f
@@ -102,8 +106,24 @@ void Renderer::draw() const
 	);
 
 	m_vertexArray.bind();
+	indexBuffer.bind();
 
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+	//std::cout << "Index count: "
+	//	<< indexBuffer.getCount()
+	//	<< '\n';
+
+	//std::cout << "VAO: "
+	//	<< m_vertexArray.id()
+	//	<< '\n';
+			
+
+	//glDrawElements(GL_TRIANGLES, 0, 3);
+	glDrawElements(
+		GL_TRIANGLES,
+		indexBuffer.getCount(),
+		GL_UNSIGNED_INT,
+		nullptr
+	);
 }
 
 void Renderer::setViewportSize(int width, int height)

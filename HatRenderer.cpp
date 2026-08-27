@@ -12,6 +12,8 @@
 #include "Graphics/Shader.h"
 #include "Graphics/Renderer.h"
 
+#include "Graphics/IndexBuffer.h"
+
 
 // GLFW initialization
 
@@ -150,13 +152,21 @@ int main()
 		framebufferHeight
 	);
 
+	unsigned int indices[] =
+	{
+		0, 1, 2
+	};
 
+	IndexBuffer indexBuffer(
+		indices,
+		3
+	);
 
 	// Main app loop.
 	while (!glfwWindowShouldClose(window))
 	{
 		renderer.clear();
-		renderer.draw();
+		renderer.draw(indexBuffer);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
