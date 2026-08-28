@@ -9,17 +9,41 @@ namespace
 {
 	const float vertices[] =
 	{
-		// Position	Front	// Color
-		-0.5f, -0.5f, 0.5f,	 1.0f, 0.0f, 0.0f,	//Red
-		 0.5f, -0.5f, 0.5f,	 0.0f, 1.0f, 0.0f,	//Green
-		 0.5f, 0.5f,  0.5f,	 0.0f, 0.0f, 1.0f,	//Blue
-		 -0.5f,0.5f,  0.5f,  0,0,0,
+		// Position	Front	// Color					// Normal
+		-0.5f, -0.5f, 0.5f,	 1.0f, 0.0f, 0.0f,/*Red*/	0.0f, 0.0f, 1.0f,
+		 0.5f, -0.5f, 0.5f,	 0.0f, 1.0f, 0.0f,/*Green*/	0.0f, 0.0f, 1.0f,
+		 0.5f, 0.5f,  0.5f,	 0.0f, 0.0f, 1.0f,/*Blue*/	0.0f, 0.0f, 1.0f,
+		 -0.5f,0.5f,  0.5f,  1.0f, 1.0f, 0.0f,			0.0f, 0.0f, 1.0f,
 
 		 // Back
-		-0.5f, -0.5f, -0.5f, 1.0f,0.0f,1.0f,  // 4 magenta
-		 0.5f, -0.5f, -0.5f, 0.0f,1.0f,1.0f,  // 5 cyan
-		 0.5f,  0.5f, -0.5f, 1.0f,1.0f,1.0f,  // 6 white
-		-0.5f,  0.5f, -0.5f, 0.2f,0.2f,0.2f  // 7 gray
+		-0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 1.0f,/*Magenta*/0.0f, 0.0f, -1.0f,
+		 0.5f, -0.5f, -0.5f, 0.0f, 1.0f, 1.0f,/*Cyan*/	0.0f, 0.0f, -1.0f,
+		 0.5f,  0.5f, -0.5f, 1.0f, 1.0f, 1.0f,/*White*/	0.0f, 0.0f, -1.0f,
+		-0.5f,  0.5f, -0.5f, 0.2f, 0.2f, 0.2f,/*Gray*/	0.0f, 0.0f, -1.0f,
+
+		// Left					Color				Normal
+		-0.5f, -0.5f, -0.5f,	1.0f, 0.0f, 1.0f,	-1.0f, 0.0f, 0.0f,
+		-0.5f, -0.5f, -0.5f,	1.0f, 0.0f, 0.0f,	-1.0f, 0.0f, 0.0f,
+		-0.5f,  0.5f, -0.5f,	1.0f, 1.0f, 0.0f,	-1.0f, 0.0f, 0.0f,
+		-0.5f,  0.5f, -0.5f,	0.2f, 0.2f, 0.2f,	-1.0f, 0.0f, 0.0f,
+
+		// Right				Color				Normal
+		0.5f, -0.5f,  0.5f,		0.0f, 1.0f, 0.0f,	1.0f, 0.0f, 0.0f,
+		0.5f, -0.5f, -0.5f,		0.0f, 1.0f, 1.0f,	1.0f, 0.0f, 0.0f,
+		0.5f,  0.5f, -0.5f,		1.0f, 1.0f, 1.0f,	1.0f, 0.0f, 0.0f,
+		0.5f,  0.5f,  0.5f,		0.0f, 0.0f, 1.0f,	1.0f, 0.0f, 0.0f,
+
+		// Top					Color				Normal
+		-0.5f,  0.5f, 0.5f,		1.0f, 1.0f, 0.0f,	0.0f, 1.0f, 0.0f,
+		 0.5f,  0.5f, 0.5f,		0.0f, 0.0f, 1.0f,	0.0f, 1.0f, 0.0f,
+		 0.5f,  0.5f, -0.5f,	1.0f, 1.0f, 1.0f,	0.0f, 1.0f, 0.0f,
+		-0.5f,  0.5f, -0.5f,	0.2f, 0.2f, 0.2f,	0.0f, 1.0f, 0.0f,
+
+		// Bottom				Color				Normal
+		-0.5f, -0.5f, -0.5f,	1.0f, 0.0f, 1.0f,	0.0f, -1.0f, 0.0f,
+		 0.5f, -0.5f, -0.5f,	0.0f, 1.0f, 1.0f,	0.0f, -1.0f, 0.0f,
+		 0.5f, -0.5f,  0.5f,	0.0f, 1.0f, 0.0f,	0.0f, -1.0f, 0.0f,
+		-0.5f, -0.5f,  0.5f,	1.0f, 0.0f, 0.0f,	0.0f, -1.0f, 0.0f
 	};
 }
 
@@ -36,15 +60,22 @@ Renderer::Renderer()
 	m_vertexArray.addFloatAttribute(
 		0,
 		3,
-		6 * sizeof(float),
+		9 * sizeof(float),
 		0
 	);
 
 	m_vertexArray.addFloatAttribute(
 		1,
 		3,
-		6 * sizeof(float),
+		9 * sizeof(float),
 		3 * sizeof(float)
+	);
+
+	m_vertexArray.addFloatAttribute(
+		2,
+		3,
+		9 * sizeof(float),
+		6 * sizeof(float)
 	);
 }
 
