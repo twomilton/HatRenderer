@@ -1,5 +1,6 @@
 #include "Renderer.h"
 #include "Math/Mat4.h"
+#include "Math/Mat3.h"
 
 #include <glad/gl.h>
 
@@ -53,6 +54,17 @@ Renderer::Renderer()
 	, m_shader(
 		HATRENDERER_SHADER_DIR "/triangle.vert",
 		HATRENDERER_SHADER_DIR "/triangle.frag")
+	, m_material{
+		Vec3{ 0.1f, 0.1f, 0.1f },
+		Vec3{ 1.0f, 1.0f, 1.0f },
+		Vec3{ 1.0f, 1.0f, 1.0f },
+		32.0f
+	}
+	, m_light{
+		Vec3{ -1.0f, -1.0f, -1.0f },
+		Vec3{ 1.0f, 1.0f, 1.0f },
+		1.0f
+	}
 {
 	m_vertexArray.bind();
 	m_vertexBuffer.bind();
@@ -142,11 +154,20 @@ void Renderer::draw(
 		//projection * view * translation;
 		projection * view * rotation;
 
+	Mat3 normalMatrix = 
+		translation.toMat3()
+		.inverse().transpose();
+
 	m_shader.bind();
 
 	m_shader.setMat4(
 		"uTransform",
 		transform
+	);
+
+	m_shader.setMat3(
+		"uNormalMatrix",
+		normalMatrix
 	);
 
 	m_vertexArray.bind();

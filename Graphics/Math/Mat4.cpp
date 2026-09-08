@@ -231,3 +231,19 @@ Mat4 Mat4::perspective(
 
 	return result;
 }
+
+Mat3 Mat4::toMat3() const
+{
+	Mat3 result{};
+
+	for (int row = 0; row < 3; ++row)
+	{
+		for (int column = 0; column < 3; ++column)
+		{
+			result.m[row][column] =
+				m[row][column];
+		}
+	}
+
+	return result;
+}

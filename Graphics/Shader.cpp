@@ -161,3 +161,71 @@ void Shader::setMat4(
 		&matrix.m[0][0]
 	);
 }
+
+void Shader::setMat3(
+	const char* name,
+	const Mat3& matrix
+) const
+{
+	const int location =
+		glGetUniformLocation(m_program, name);
+
+	if (location == -1)
+	{
+		std::cerr << "WARNING: Uniform not found: "
+			<< name << '\n';
+
+		return;
+	}
+
+	glUniformMatrix3fv(
+		location,
+		1,
+		GL_FALSE,
+		&matrix.m[0][0]
+	);
+}
+
+void Shader::setVec3(
+	const char* name,
+	const Vec3& value
+) const
+{
+	const int location =
+		glGetUniformLocation(m_program, name);
+
+	if (location == -1)
+	{
+		std::cerr << "WARNING: Uniform not found: "
+			<< name << '\n';
+		return;
+	}
+
+	glUniform3f(
+		location,
+		value.x,
+		value.y,
+		value.z
+	);
+}
+
+void Shader::setFloat(
+	const char* name,
+	float value
+) const
+{
+	const int location =
+		glGetUniformLocation(m_program, name);
+
+	if (location == -1)
+	{
+		std::cerr << "WARNING: Uniform not found: "
+			<< name << '\n';
+		return;
+	}
+
+	glUniform1f(
+		location,
+		value
+	);
+}

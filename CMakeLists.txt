@@ -62,7 +62,7 @@ add_executable(HatRenderer
 
 	Graphics/IndexBuffer.cpp
 	
-  "Graphics/VertexArray.cpp" "Graphics/VertexArray.h" "Graphics/Math/Vec3.h" "Graphics/Math/Mat4.h" "Graphics/Math/Mat4.cpp" "Graphics/Math/Vec3.cpp" "Graphics/IndexBuffer.h" "Graphics/IndexBuffer.cpp")
+  "Graphics/VertexArray.cpp" "Graphics/VertexArray.h" "Graphics/Math/Vec3.h" "Graphics/Math/Mat4.h" "Graphics/Math/Mat4.cpp" "Graphics/Math/Vec3.cpp" "Graphics/IndexBuffer.h" "Graphics/IndexBuffer.cpp" "Graphics/Math/Mat3.h" "Graphics/Math/Mat3.cpp" "Graphics/Math/Material.h" "Graphics/Math/DirectionalLight.h")
 
 target_compile_definitions(HatRenderer
 	PRIVATE

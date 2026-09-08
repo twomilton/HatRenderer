@@ -1,7 +1,12 @@
 #pragma once
 
+#include "Mat3.h"
+
+
 struct Mat4
 {
+	Mat3 toMat3() const;
+
 	float m[4][4]{};
 
 	static Mat4 identity();
@@ -26,7 +31,7 @@ struct Mat4
 		float bottom,
 		float top,
 		float nearPlane,
-		float farPlnae
+		float farPlane
 	);
 
 	static Mat4 perspective(

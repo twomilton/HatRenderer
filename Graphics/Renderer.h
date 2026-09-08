@@ -6,6 +6,8 @@
 #include "VertexArray.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
+#include "Math/Material.h"
+#include "Math/DirectionalLight.h"
 
 class Renderer
 {
@@ -26,5 +28,8 @@ private:
 
 	int m_viewportWidth = 1280;
 	int m_viewportHeight = 720;
+
+	Material m_material;
+	DirectionalLight m_light;
 
 };

@@ -5,6 +5,7 @@ layout (location = 1) in vec3 aColor;
 layout (location = 2) in vec3 aNormal;
 
 uniform mat4 uTransform;
+uniform mat3 uNormalMatrix;
 
 out vec3 vertexColor;
 out vec3 vNormal;
@@ -16,5 +17,8 @@ void main()
 		vec4(aPosition, 1.0);
 
 	vertexColor = aColor;
-	vNormal = aNormal;
+
+	vNormal = normalize(
+		uNormalMatrix * aNormal
+	);
 }
