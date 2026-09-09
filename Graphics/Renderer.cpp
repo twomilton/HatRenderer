@@ -56,7 +56,7 @@ Renderer::Renderer()
 		HATRENDERER_SHADER_DIR "/triangle.frag")
 	, m_material{
 		Vec3{ 0.1f, 0.1f, 0.1f },
-		Vec3{ 1.0f, 1.0f, 1.0f },
+		Vec3{ 0.2f, 0.7f, 1.0f },
 		Vec3{ 1.0f, 1.0f, 1.0f },
 		32.0f
 	}
@@ -168,6 +168,26 @@ void Renderer::draw(
 	m_shader.setMat3(
 		"uNormalMatrix",
 		normalMatrix
+	);
+
+	m_shader.setVec3(
+		"uLightDirection",
+		m_light.direction
+	);
+
+	m_shader.setVec3(
+		"uLightColor",
+		m_light.color
+	);
+
+	m_shader.setFloat(
+		"uLightIntensity",
+		m_light.intensity
+	);
+
+	m_shader.setVec3(
+		"uMaterialDiffuse",
+		m_material.diffuse
 	);
 
 	m_vertexArray.bind();
